@@ -1,0 +1,7 @@
+# Dependency directories
+.vscode/
+build/
+Code/BackEnd/Shared/node_modules/
+Code/BackEnd/Shared/dist
+
+

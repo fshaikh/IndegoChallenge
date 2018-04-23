@@ -1,0 +1,16 @@
+{
+  "name": "indego.shared",
+  "version": "0.1.0",
+  "description": "Package contains common code between backend services. For eg: external service calls,DAL,logging, etc",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build-ts",
+    "build-ts": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Furqan Shaikh",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^2.8.3"
+  }
+}
