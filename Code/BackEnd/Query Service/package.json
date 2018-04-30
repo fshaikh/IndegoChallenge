@@ -1,0 +1,21 @@
+{
+  "name": "indego.queryservice",
+  "version": "0.1.0",
+  "description": "Package contains code for Query Service which runs at specified interval and fetches data from Indeo and Open Weather and persists to a Mongo database",
+  "main": "test.js",
+  "scripts": {
+    "build": "npm run build-ts",
+    "build-ts": "tsc",
+    "test": "mocha -r ts-node/register test/**/**.ts"
+  },
+  "author": "Furqan Shaikh",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "sinon": "^4.5.0",
+    "ts-node": "^6.0.1",
+    "typescript": "^2.8.3"
+  }
+}

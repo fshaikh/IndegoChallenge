@@ -3,5 +3,7 @@
 build/
 Code/BackEnd/Shared/node_modules/
 Code/BackEnd/Shared/dist
+Code/BackEnd/Query Service/node_modules/
+Code/BackEnd/Query Service/dist
 
 
