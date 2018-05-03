@@ -1,5 +1,5 @@
-import { ICommand } from "./ICommand";
-import { CommandRequest } from "./CommandRequest";
+import { ICommand } from '../../node_modules/indego.shared/dist/app/ICommand';
+import { CommandRequest } from '../../node_modules/indego.shared/dist/app/CommandRequest';
 import { QueryServiceManager } from "../services/QueryServiceManager";
 import QueryRequest from "../Models/QueryRequest";
 import QueryServiceCommandRequest from "./QueryServiceCommandRequest";

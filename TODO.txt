@@ -1,20 +1,31 @@
 Shared
-1. Find out best way to inject appid and urls for external APIs. Right now it is hardcoded. Use env npm package. See if that will work for PCF
 3. Write unit tests for IndegoHttpService
         - Make actual HTTP request. In unit tests, it is not required to make actual HTTP calls. That should be done instead in E2E tests
         - Mocking HTTP Requests
 4. Write unit tests for OpenWeatherHttpService
-6. Define TypeScript types for Shared module
+5. Create indexes
+
 
 Query Service
 5. Write unit tests for Query Service
-7. Read all configuration in Query Service from env
+Include Shared type declarations to remove the ts warning when using import
+
 
 API Service
+1. Unit tests
+2. API Versioning
+3. Adding compression middleware is not firing the routes
 
 Common
+1. Deploy to PCF
+2. Deploy using Docker 
+3. Push to Github
+4. Steps for building/running 
 8. Design logging.For eg: use a package which can log and define in Shared module
 
 DONE:
 1. Configure mocha tests in TypeScript - https://journal.artfuldev.com/write-tests-for-typescript-projects-with-mocha-and-chai-in-typescript-86e053bdb2b6
 2. Design DAL for mongodb
+1. Find out best way to inject appid and urls for external APIs. Right now it is hardcoded. Use env npm package. See if that will work for PCF
+6. Define TypeScript types for Shared module
+7. Read all configuration in Query Service from env

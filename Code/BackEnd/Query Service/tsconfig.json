@@ -8,6 +8,14 @@
         "sourceMap": true,
         "outDir": "dist",
         "baseUrl": ".",
+        "typeRoots": [
+            "../types/app",
+            "../types/DAL",
+            "../types/http",
+            "../types/Models",
+            "../types/services",
+            "node_modules/@types"
+        ],
         "paths": {
             "*": [
                 "node_modules/*",

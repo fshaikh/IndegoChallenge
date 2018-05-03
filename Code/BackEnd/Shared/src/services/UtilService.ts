@@ -2,11 +2,11 @@
  * Service which exposes utility functions
  */
 
- class UtilService {
+ export default class UtilService {
      /**
      * Returns the uri for connecting to mongo
      */
-    public getMongoUrl(): string{
+    public static getMongoUrl(): string{
         // If deployed to PCF, use the environment variable
         var vcap = process.env.VCAP_SERVICES
         if(vcap){
@@ -16,6 +16,10 @@
             return process.env.MONGO_URL;
         }
     }
+
+    public static isValidDate(input: string) : boolean {
+        return isNaN(Date.parse(input)) ? false: true;
+    }
  }
- const utilService = new UtilService();
- export default utilService;
+//  const utilService = new UtilService();
+//  export default utilService;

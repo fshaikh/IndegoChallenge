@@ -6,6 +6,7 @@ import { getDatabaseConnection } from './DatabaseConnectionManager';
 import { timingSafeEqual } from 'crypto';
 import InsertDocumentResponse from '../Models/InsertDocumentResponse';
 import DataObjectBase from '../Models/DataObjectBase';
+import FindDocumentsResponse from '../Models/FindDocumentsResponse';
 
  export default abstract class DABase {
     protected _database: Db;
@@ -27,8 +28,21 @@ import DataObjectBase from '../Models/DataObjectBase';
             response.insertCount = insertResponse.insertedCount;
             response.insertedId = insertResponse.insertedIds['0'];
             return response;
-        }catch(ex){
+        } catch(ex) {
             return this.getInsertErrorResponse(insertResponse, ex);
+        }
+    }
+
+    protected async doFind(collection: string, projection: object, filter: object): Promise<FindDocumentsResponse> {
+        let response: FindDocumentsResponse = new FindDocumentsResponse();
+        try {
+            const records = await this.getCollection(collection).find(filter, projection).toArray();
+            response.Documents = records;
+            return response;
+        } catch(e) {
+            console.log(e);
+            response.isSuccess = false;
+            return response;
         }
     }
 

@@ -8,8 +8,6 @@
         "sourceMap": true,
         "outDir": "dist",
         "baseUrl": ".",
-        "declaration": true,
-        "declarationDir": "../types",
         "paths": {
             "*": [
                 "node_modules/*",

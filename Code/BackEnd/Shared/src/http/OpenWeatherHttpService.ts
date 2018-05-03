@@ -4,7 +4,7 @@ import HttpServiceBase from './HttpServiceBase';
 
 export default class OpenWeatherHttpService extends HttpServiceBase{
     public async getCurrentWeather(request: OpenWeatherRequest,jsonSerialize: boolean = false): Promise<string> {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${request.city}&appid=89c623a5329be98040af22edf01a9702`;
+        const url = `${process.env.OPENWEATHER_BASE_URL}/weather?q=${request.city}&appid=${process.env.OPENWEATHER_APPID}`;
         console.log(url);
         try{
             const json = await this.get(url);

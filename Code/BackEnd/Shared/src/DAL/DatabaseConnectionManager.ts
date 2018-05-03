@@ -23,7 +23,7 @@ var _databaseConnections: Map<string, Db>  = new Map();
                 
             }
             catch (e) {
-                console.log(`Error in MongoDb Connection: ${e}`);
+               // console.log(`Error in MongoDb Connection: ${e}`);
                 resolve(false);
             }
         });

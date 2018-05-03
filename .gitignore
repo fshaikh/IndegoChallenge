@@ -5,5 +5,8 @@ Code/BackEnd/Shared/node_modules/
 Code/BackEnd/Shared/dist
 Code/BackEnd/Query Service/node_modules/
 Code/BackEnd/Query Service/dist
+Code/BackEnd/API Server/node_modules/
+Code/BackEnd/API Server/dist
+Code/BackEnd/types/
 
 
