@@ -13,8 +13,10 @@ Include Shared type declarations to remove the ts warning when using import
 
 API Service
 1. Unit tests
+      Testing Controllers - https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
 2. API Versioning
 3. Adding compression middleware is not firing the routes
+4. Fix issue where doing npm run start is failing to load .env
 
 Common
 1. Deploy to PCF

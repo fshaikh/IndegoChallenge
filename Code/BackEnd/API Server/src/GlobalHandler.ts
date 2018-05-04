@@ -4,10 +4,8 @@
 import http from 'http';
 
  export default class GlobalHandler {
-     private _server: http.Server;
      constructor(server: http.Server) {
-         this._server = server;
-         this._server.on('error', this.handleHttpError);
+         server.on('error', this.handleHttpError);
          // Register catchall uncaught exception at process level
          process.on('uncaughtException', this.handleUncaughtException);
      }

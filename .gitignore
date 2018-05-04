@@ -8,5 +8,6 @@ Code/BackEnd/Query Service/dist
 Code/BackEnd/API Server/node_modules/
 Code/BackEnd/API Server/dist
 Code/BackEnd/types/
+.env
 
 

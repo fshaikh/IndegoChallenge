@@ -7,6 +7,7 @@ import { timingSafeEqual } from 'crypto';
 import InsertDocumentResponse from '../Models/InsertDocumentResponse';
 import DataObjectBase from '../Models/DataObjectBase';
 import FindDocumentsResponse from '../Models/FindDocumentsResponse';
+import FindDocumentResponse from '../Models/FindDocumentResponse';
 
  export default abstract class DABase {
     protected _database: Db;
@@ -38,6 +39,19 @@ import FindDocumentsResponse from '../Models/FindDocumentsResponse';
         try {
             const records = await this.getCollection(collection).find(filter, projection).toArray();
             response.Documents = records;
+            return response;
+        } catch(e) {
+            console.log(e);
+            response.isSuccess = false;
+            return response;
+        }
+    }
+
+    protected async doFindOne(collection: string, projection: object, filter: object): Promise<FindDocumentResponse> {
+        let response: FindDocumentResponse = new FindDocumentResponse();
+        try {
+            const document = await this.getCollection(collection).findOne(filter, projection);
+            response.Document = document;
             return response;
         } catch(e) {
             console.log(e);

@@ -1,4 +1,4 @@
-import IndegoHistoryDA from "./DAL/IndegoHistoryDA";
+import IndegoHistoryCommandDA from "./DAL/History/IndegoHistoryCommandDA";
 import HistoryModel from "./Models/HistoryModel";
 import OpenWeatherRequest from './Models/OpenWeatherRequest';
 import ResponseBase from "./Models/ResponseBase";
@@ -15,5 +15,5 @@ export {
     IdService,
     IndegoHttpService,
     OpenWeatherHttpService,
-    IndegoHistoryDA
+    IndegoHistoryCommandDA
 };

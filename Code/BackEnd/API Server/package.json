@@ -2,8 +2,8 @@
   "name": "indego.apiserver",
   "version": "0.1.0",
   "description": "Package contains code for API Server",
-  "main": "dist/main.js",
   "scripts": {
+    "start": "node dist/main",
     "build": "npm run build-ts",
     "build-ts": "tsc",
     "test": "mocha -r ts-node/register test/**/**.ts"

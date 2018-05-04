@@ -16,11 +16,15 @@ export default abstract class APIControllerBase {
         return this.SendResponse(200 , response, httpResponse);
     }
 
+    protected NotFound(response: ResponseBase, httpResponse: express.Response): express.Response {
+        return this.SendResponse(404 , response, httpResponse);
+    }
+
     protected InternalServerError(response: ResponseBase, httpResponse: express.Response): express.Response {
         return this.SendResponse(500 , response , httpResponse);
     }
 
     private SendResponse(status: number,response: ResponseBase, httpResponse: express.Response): express.Response {
-        return httpResponse.status(status).send(JSON.stringify(response));
+        return httpResponse.status(status).send(response);
     }
 }

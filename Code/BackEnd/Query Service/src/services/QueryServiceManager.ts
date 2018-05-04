@@ -3,7 +3,7 @@ import OpenWeatherHttpService from '../../node_modules/indego.shared/dist/http/O
 import OpenWeatherRequest from '../../node_modules/indego.shared/dist/Models/OpenWeatherRequest';
 import HistoryModel from '../../node_modules/indego.shared/dist/Models/HistoryModel';
 import ResponseBase from '../../node_modules/indego.shared/dist/Models/ResponseBase';
-import IndegoHistoryDA from '../../node_modules/indego.shared/dist/DAL/IndegoHistoryDA';
+import IndegoHistoryCommandDA from '../../node_modules/indego.shared/dist/DAL/History/IndegoHistoryCommandDA';
 import QueryRequest from '../Models/QueryRequest';
 
 export class QueryServiceManager {    
@@ -55,7 +55,7 @@ export class QueryServiceManager {
     private async save(historyModel: HistoryModel): Promise<ResponseBase>{
         let response: ResponseBase = new ResponseBase();
         try{
-            const historyDA: IndegoHistoryDA = new IndegoHistoryDA(process.env.INDEGO_DB);
+            const historyDA: IndegoHistoryCommandDA = new IndegoHistoryCommandDA(process.env.INDEGO_DB);
             const insertDocumentResponse = await historyDA.saveHistoryData(historyModel);    
             return insertDocumentResponse;
         }catch(ex){

@@ -10,7 +10,6 @@ import ControllerBootstrapper from './Controllers/ControllerBootstrapper';
 
 export default class APIServerController extends AppController {
     private _app: express.Application;
-    private _router: Router;
     private _jsonParser;
 
     constructor() {
@@ -26,10 +25,10 @@ export default class APIServerController extends AppController {
         }
         // Do Express setup here
         this._app = express();
-        this._router = express.Router();
         this.setupMiddlewares();
+        
         // bootstrap controllers
-        ControllerBootstrapper.bootstrap(this._app, this._router);
+        ControllerBootstrapper.bootstrap(this._app);
         
         return status;
     }
