@@ -13,6 +13,9 @@ export default class IndegoHistoryQueryDA extends DABase {
 
     constructor(database: string) {
         super(database);
+        // Create indexes
+        this.createIndex({ at: 1 }, HistoryDACommon.HISTORY_COLLECTION);
+        this.createIndex('stations.features.properties.kioskId', HistoryDACommon.HISTORY_COLLECTION);
     }
 
     public async getStationsAtTimestamp(request: HistoryRequest, excludeSystemFields: boolean = true): Promise<HistoryResponse> {

@@ -81,6 +81,22 @@ import FindDocumentResponse from '../Models/FindDocumentResponse';
         await this.getCollection(collection).deleteMany({});
     }
 
+    /**
+     * Creates index on a given collection
+     * @param {*} name - Field name
+     * @param {*} collection - Collection. Indexes are created on collection
+     * @param {*} options - Options containing other information like: type, constraints, collation, etc
+     */
+    protected async createIndex(name: string | {}, collection: string, options = {}){
+        try{
+            await this.getCollection(collection).createIndex(name,options);
+            console.log(`Successfully provisioned index ${name } on : ${collection}`);
+        }
+        catch(e){
+            console.log(`Error in Provisioning Indexes: ${e}`);
+        }
+    }
+
     private getCollection(collection: string): Collection {
         return this._database.collection(collection);
     }

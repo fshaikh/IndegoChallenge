@@ -3,7 +3,7 @@ Shared
         - Make actual HTTP request. In unit tests, it is not required to make actual HTTP calls. That should be done instead in E2E tests
         - Mocking HTTP Requests
 4. Write unit tests for OpenWeatherHttpService
-5. Create indexes
+5. Verify if kioskId index is working
 
 
 Query Service
@@ -21,6 +21,7 @@ API Service
       Solution is to push to a reverse proxy (nginx/HAProxy) which sits infront of Node.
       Node is best suited for serving dynamic content
 4. Fix issue where doing npm run start is failing to load .env
+5. Do a performance test using Apache ab tool similar to FormBuilder. Note down the numbers
 
 Common
 1. Deploy to PCF

@@ -13,8 +13,7 @@ var _databaseConnections: Map<string, Db>  = new Map();
                 }
                 let connectionString = getConnectionString(database, mongoUrl)
                 MongoClient.connect(connectionString).then((client) => {
-                    console.log(`Successfully connected to mongo service`);
-                    _databaseConnections.set(database , client.db());
+                    handleSuccessfulConnection(database, client.db());
                     resolve(true);
                 }).catch((reason) => {
                     console.log(`MongoDb connection failed: ${reason}`);
@@ -37,6 +36,15 @@ var _databaseConnections: Map<string, Db>  = new Map();
     function getConnectionString(database: string, url: string) {
         return `${url}/${database}`;
     } 
+
+    function handleSuccessfulConnection(database: string, db: Db) {
+        console.log(`Successfully connected to mongo service`);
+        _databaseConnections.set(database , db);
+    }
+
+    function handleFailedConnection(){
+        
+    }
 
     export {
         connect,
