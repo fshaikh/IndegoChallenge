@@ -1,4 +1,5 @@
 import HistoryRequest from '../../node_modules/indego.shared/dist/Models/HistoryRequest';
+import HistoryRangeRequest from '../../node_modules/indego.shared/dist/Models/HistoryRangeRequest';
 import { HistoryResponse, HistoriesResponse } from '../../node_modules/indego.shared/dist/Models/HistoryResponse';
 import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/History/IndegoHistoryQueryDA';
 /**
@@ -29,6 +30,26 @@ import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/Hist
                 const features = stations.features;
                 response.Model.stations = features.filter((item) => item.properties.kioskId === historyRequest.Id);
             }
+            return response;
+        }catch(ex){
+            response.IsSuccess = false;
+            return response;
+        }
+     }
+
+     public async getStationWithinRange(historyRangeRequest: HistoryRangeRequest): Promise<HistoriesResponse>{
+        let response: HistoriesResponse = new HistoriesResponse();
+        try{
+            const historyDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(process.env.INDEGO_DB);
+            response = await historyDA.getStationWithinRange(historyRangeRequest);  
+            let models = response.Models;
+            if(models && models.length > 0){
+                response.Models = models.map((model) => {
+                    model.stations.features = model.stations.features.filter((item) => item.properties.kioskId === historyRangeRequest.Id);
+                    return model;
+                });
+            }
+
             return response;
         }catch(ex){
             response.IsSuccess = false;

@@ -10,12 +10,15 @@ import InsertDocumentResponse from '../../src/Models/InsertDocumentResponse';
 import IdService from '../../src/services/IdService';
 import HistoryRequest from '../../src/Models/HistoryRequest';
 import { HistoriesResponse, HistoryResponse } from '../../src/Models/HistoryResponse';
+import HistoryRangeRequest from '../../src/Models/HistoryRangeRequest';
 
 describe('IndegoHistoryDA' , () => {
      const DBName = 'IndegoDb';
      before( async function(){
         const status = await DatabaseConnectionManager.connect(DBName,'mongodb://127.0.0.1');
      });
+
+     
 
      async function insertHistory(indegoHistoryDA, at: Date,stations=null){
         const historyModel = new HistoryModel();
@@ -63,6 +66,12 @@ describe('IndegoHistoryDA' , () => {
     //     }); 
     // });
     describe('IndegoHistoryQueryDA',  async () => {
+        beforeEach(async () => {
+            // remove all records from indg_history collection
+            const queryDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA('IndegoDb');
+            await queryDA.removeAll();
+
+        });
         describe('History DA Finds', async () => {
             // it('should return stations for a saved timestamp', async function() {
             //     const indegoHistoryCommandDA = new IndegoHistoryCommandDA(DBName);
@@ -115,6 +124,65 @@ describe('IndegoHistoryDA' , () => {
                     expect(historyResponse.Model).to.not.null;
                 }
             });
+
+            describe('getStationWithinRange', async () => {
+                it('should return array of history model', async function() {
+                    const request: HistoryRangeRequest = new HistoryRangeRequest();
+                    let indegoHistoryQueryDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(DBName);
+                    const historyResponse: HistoriesResponse = await indegoHistoryQueryDA.getStationWithinRange(request);
+                    expect(historyResponse).to.not.null;
+                });
+
+                it('should return station records with a station id and for a timestamp range', async function() {
+                    const indegoHistoryCommandDA = new IndegoHistoryCommandDA(DBName);
+                    const startDate = new Date();
+                    // first insert
+                    let response = await insertHistory(indegoHistoryCommandDA, startDate , {
+                        'features':[
+                            {
+                                'properties':{
+                                    'kioskId': '1234'
+                                }
+                            },
+                            {
+                                'properties':{
+                                    'kioskId': '1111'
+                                }
+                            }
+                        ]
+                    });
+                    let endDate = new Date();
+                    endDate.setMinutes(startDate.getMinutes() + 10);
+                    response = await insertHistory(indegoHistoryCommandDA, endDate , {
+                        'features':[
+                            {
+                                'properties':{
+                                    'kioskId': '1234'
+                                }
+                            },
+                            {
+                                'properties':{
+                                    'kioskId': '1235'
+                                }
+                            }
+                        ]
+                    });
+                   
+                    if(response.isSuccess){
+                        const request: HistoryRangeRequest = new HistoryRangeRequest();
+                        request.StartDate = startDate;
+                        request.EndDate = endDate;
+                        request.Id = '1234';
+                        let indegoHistoryQueryDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(DBName);
+                        const historyResponse: HistoriesResponse = await indegoHistoryQueryDA.getStationWithinRange(request);
+                        expect(historyResponse.isSuccess).true;
+                        expect(historyResponse.Models).to.not.null;
+                        expect(historyResponse.Models.length).to.equal(2);
+                        
+                    }
+                });
+            });
+            
         });
     });
     

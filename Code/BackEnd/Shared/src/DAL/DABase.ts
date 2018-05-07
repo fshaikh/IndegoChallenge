@@ -34,6 +34,23 @@ import FindDocumentResponse from '../Models/FindDocumentResponse';
         }
     }
 
+    protected async doInsertMany(collection: string, data: DataObjectBase[]): Promise<InsertDocumentResponse> {
+        let response: InsertDocumentResponse = new InsertDocumentResponse();
+        // Stripping the type from InsertOneWriteOpResult since mongoDb returns 
+        // insertedIds as an object and @types define it as an ObjectID
+        let insertResponse: any;
+        try{
+            insertResponse = await this.getCollection(collection).insert(data);
+            if (insertResponse == null || !insertResponse.result.ok) {
+                return this.getInsertErrorResponse(insertResponse, 'Failed to insert documents');
+            }
+            response.insertCount = insertResponse.insertedCount;
+            return response;
+        } catch(ex) {
+            return this.getInsertErrorResponse(insertResponse, ex);
+        }
+    }
+
     protected async doFind(collection: string, projection: object, filter: object): Promise<FindDocumentsResponse> {
         let response: FindDocumentsResponse = new FindDocumentsResponse();
         try {
@@ -58,6 +75,10 @@ import FindDocumentResponse from '../Models/FindDocumentResponse';
             response.isSuccess = false;
             return response;
         }
+    }
+
+    protected async doRemoveAll(collection: string){
+        await this.getCollection(collection).deleteMany({});
     }
 
     private getCollection(collection: string): Collection {

@@ -13,14 +13,18 @@ Include Shared type declarations to remove the ts warning when using import
 
 API Service
 1. Unit tests
+      Test routes. When hitting routes, appropriate status code is sent. For eg: test if /api/v1/stations? returns expected code
       Testing Controllers - https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
 2. API Versioning
 3. Adding compression middleware is not firing the routes
+      Ideally CPU-intensive tasks like compression,SSL Termination should be avoided in Node because of its single threaded nature.
+      Solution is to push to a reverse proxy (nginx/HAProxy) which sits infront of Node.
+      Node is best suited for serving dynamic content
 4. Fix issue where doing npm run start is failing to load .env
 
 Common
 1. Deploy to PCF
-2. Deploy using Docker 
+2. Deploy using Docker to AWS Elastic Beanstalk
 3. Push to Github
 4. Steps for building/running 
 8. Design logging.For eg: use a package which can log and define in Shared module
