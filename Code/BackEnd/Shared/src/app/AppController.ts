@@ -1,6 +1,7 @@
 import { ICommand } from "./ICommand";
 import * as DatabaseConnectionManager from '../DAL/DatabaseConnectionManager';
 import dotenv from 'dotenv';
+import ConfigServiceBase from '../services/ConfigService';
 
 /**
  * App Controller which orchestrates the logic
@@ -22,7 +23,8 @@ import dotenv from 'dotenv';
         }
         console.log('Env parsed and injected into process');
         
-        const status = await DatabaseConnectionManager.connect(process.env.INDEGO_DB, process.env.MONGO_URL);
+        const status = await DatabaseConnectionManager.connect(ConfigServiceBase.create().getDatabase(),
+                                                               ConfigServiceBase.create().getMongoUrl());
         if(status){
             console.log('Successfully connected to Mongo instance');
         }else{

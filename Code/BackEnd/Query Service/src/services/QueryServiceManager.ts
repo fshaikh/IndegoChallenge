@@ -55,7 +55,7 @@ export class QueryServiceManager {
     private async save(historyModel: HistoryModel): Promise<ResponseBase>{
         let response: ResponseBase = new ResponseBase();
         try{
-            const historyDA: IndegoHistoryCommandDA = new IndegoHistoryCommandDA(process.env.INDEGO_DB);
+            const historyDA: IndegoHistoryCommandDA = IndegoHistoryCommandDA.create();
             const insertDocumentResponse = await historyDA.saveHistoryData(historyModel);    
             return insertDocumentResponse;
         }catch(ex){

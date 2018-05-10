@@ -10,7 +10,7 @@ import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/Hist
      public async getStationsAtTimestamp(historyRequest: HistoryRequest): Promise<HistoriesResponse> {
         let response: HistoryResponse = new HistoryResponse();
         try{
-            const historyDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(process.env.INDEGO_DB);
+            const historyDA: IndegoHistoryQueryDA = IndegoHistoryQueryDA.create();
             response = await historyDA.getStationsAtTimestamp(historyRequest);   
             return response;
         }catch(ex){
@@ -22,7 +22,7 @@ import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/Hist
      public async getStationAtTimestamp(historyRequest: HistoryRequest): Promise<HistoryResponse> {
         let response: HistoryResponse = new HistoryResponse();
         try{
-            const historyDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(process.env.INDEGO_DB);
+            const historyDA: IndegoHistoryQueryDA = IndegoHistoryQueryDA.create();
             response = await historyDA.getStationAtTimestamp(historyRequest);  
             let model = response.Model;
             let stations = model.stations;  
@@ -40,7 +40,7 @@ import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/Hist
      public async getStationWithinRange(historyRangeRequest: HistoryRangeRequest): Promise<HistoriesResponse>{
         let response: HistoriesResponse = new HistoriesResponse();
         try{
-            const historyDA: IndegoHistoryQueryDA = new IndegoHistoryQueryDA(process.env.INDEGO_DB);
+            const historyDA: IndegoHistoryQueryDA = IndegoHistoryQueryDA.create();
             response = await historyDA.getStationWithinRange(historyRangeRequest);  
             let models = response.Models;
             if(models && models.length > 0){
@@ -56,4 +56,6 @@ import IndegoHistoryQueryDA from '../../node_modules/indego.shared/dist/DAL/Hist
             return response;
         }
      }
+
+     
  }

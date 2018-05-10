@@ -5,6 +5,7 @@ import { HistoryResponse, HistoriesResponse } from '../../Models/HistoryResponse
 import * as HistoryDACommon from './HistoryDACommon';
 import HistoryRangeRequest from '../../Models/HistoryRangeRequest';
 import FindDocumentsResponse from '../../Models/FindDocumentsResponse';
+import ConfigServiceBase from '../../services/ConfigService';
 
 /**
  * DA class which defines methods for Querying History collection
@@ -16,6 +17,10 @@ export default class IndegoHistoryQueryDA extends DABase {
         // Create indexes
         this.createIndex({ at: 1 }, HistoryDACommon.HISTORY_COLLECTION);
         this.createIndex('stations.features.properties.kioskId', HistoryDACommon.HISTORY_COLLECTION);
+    }
+
+    public static create(): IndegoHistoryQueryDA{
+        return new IndegoHistoryQueryDA(ConfigServiceBase.create().getDatabase());
     }
 
     public async getStationsAtTimestamp(request: HistoryRequest, excludeSystemFields: boolean = true): Promise<HistoryResponse> {

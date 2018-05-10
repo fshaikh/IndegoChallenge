@@ -1,6 +1,7 @@
 import QueryController from "./QueryController";
 import CommandFactory from "./Commands/CommandFactory";
 import { CommandEnum } from "./Commands/CommandEnum";
+import QueryConfigService from "./services/QueryConfigService";
 
 
 var queryController;
@@ -27,7 +28,7 @@ const doWork = async () => {
     if(! await init()){
         console.log('Failed to start Query Service');
     }else{
-        //setInterval(doWork, process.env.QUERYSERVICE_INTERVAL);
+        //setInterval(doWork, QueryConfigService.create().getInterval());
         doWork();
     }
 })();

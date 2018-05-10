@@ -90,7 +90,7 @@ import FindDocumentResponse from '../Models/FindDocumentResponse';
     protected async createIndex(name: string | {}, collection: string, options = {}){
         try{
             await this.getCollection(collection).createIndex(name,options);
-            console.log(`Successfully provisioned index ${name } on : ${collection}`);
+            //console.log(`Successfully provisioned index ${name } on : ${collection}`);
         }
         catch(e){
             console.log(`Error in Provisioning Indexes: ${e}`);

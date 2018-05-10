@@ -2,7 +2,13 @@ Shared
 3. Write unit tests for IndegoHttpService
         - Make actual HTTP request. In unit tests, it is not required to make actual HTTP calls. That should be done instead in E2E tests
         - Mocking HTTP Requests
+            - Using nock. Nock works by intercepting external HTTP requests and enabling us to return 
+                  custom responses. 
+           -  It works by overriding Node's http.request function and i
+             Refer: https://github.com/node-nock/nock#how-does-it-work and https://scotch.io/tutorials/nodejs-tests-mocking-http-requests
+
 4. Write unit tests for OpenWeatherHttpService
+        - Mock HTTP requests using sinon. Refer: http://mherman.org/blog/2017/11/06/stubbing-http-requests-with-sinon/#.WvFyI4iFM2z
 5. Verify if kioskId index is working
 
 
@@ -24,11 +30,19 @@ API Service
 5. Do a performance test using Apache ab tool similar to FormBuilder. Note down the numbers
 
 Common
+1. Use describe.skip to split between unit and integration tests
 1. Deploy to PCF
 2. Deploy using Docker to AWS Elastic Beanstalk
 3. Push to Github
 4. Steps for building/running 
-8. Design logging.For eg: use a package which can log and define in Shared module
+5. Design logging.For eg: use a package which can log and define in Shared module
+6. Create a npx/npm package which can be used to scaffold a Node project
+      NodeJS + Express + TypeScript + MongoDb + Unit Test + Sample Code
+   Usage:
+      npx install create-node-app
+        - This will scaffold the app code, unit tests, package.json, npm install
+      cd <appfolder>
+      npm start
 
 DONE:
 1. Configure mocha tests in TypeScript - https://journal.artfuldev.com/write-tests-for-typescript-projects-with-mocha-and-chai-in-typescript-86e053bdb2b6
