@@ -21,7 +21,7 @@ API Service
 1. Unit tests
       Test routes. When hitting routes, appropriate status code is sent. For eg: test if /api/v1/stations? returns expected code
       Testing Controllers - https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
-2. API Versioning
+
 3. Adding compression middleware is not firing the routes
       Ideally CPU-intensive tasks like compression,SSL Termination should be avoided in Node because of its single threaded nature.
       Solution is to push to a reverse proxy (nginx/HAProxy) which sits infront of Node.
@@ -50,3 +50,15 @@ DONE:
 1. Find out best way to inject appid and urls for external APIs. Right now it is hardcoded. Use env npm package. See if that will work for PCF
 6. Define TypeScript types for Shared module
 7. Read all configuration in Query Service from env
+2. API Versioning
+
+References:
+https://github.com/g2i/backend-challenge
+https://www.compose.com/articles/understanding-dates-in-compose-mongodb/
+https://stackoverflow.com/questions/19819870/date-query-with-isodate-in-mongodb-doesnt-seem-to-work
+https://semaphoreci.com/community/tutorials/mocking-external-http-requests-in-node-tests-with-nock
+https://github.com/node-nock/nock#read-this---about-interceptors
+https://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
+https://blog.khophi.co/mocha-chai-chai-http-test-express-api-auth-endpoints/
+https://medium.com/@the1mills/how-to-test-your-npm-module-without-publishing-it-every-5-minutes-1c4cb4b369be
+https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html

@@ -6,6 +6,8 @@ import compression from 'compression';
 
 import AppController from '../node_modules/indego.shared/dist/app/AppController';
 import ControllerBootstrapper from './Controllers/ControllerBootstrapper';
+import { keepAlive } from './middleware/KeepAlive';
+import { sallet } from './middleware/Sallet';
 
 
 export default class APIServerController extends AppController {
@@ -41,6 +43,12 @@ export default class APIServerController extends AppController {
         // setup response compression
         //this._app.use(compression);
 
+        // app optimisation middlewares
+        this._app.use(keepAlive);
+
+        // app security middlewares
+        this._app.use(sallet);
+
         // setup body-parsing parsers. Query strings, json, etc
         this.setupBodyParsers();
 
@@ -58,3 +66,4 @@ export default class APIServerController extends AppController {
         this._app.use(this._jsonParser);
     }
 }
+
